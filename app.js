@@ -21,46 +21,13 @@ const TOTAL_ALIEN_SHIP = 6;
 // human ship
 class Ship {
     constructor() {
-        this.human = true;
         this.hull = 20;
         this.firepower = 5;
         this.accuracy = 0.7;
     }
 
-    static checkWin(alien, human) {
-        // alien still alive
-        if (alien.length > 0) {
-            if (alien[0].hull <= 0) {
-                // remove the attcked alien ship
-                alien.shift();
-                console.log(`%c Alien ship #${alien[0].num} was destroyed!`);
-
-                // still alien ship remains..
-                if (alien.length > 0) {
-                    console.log(`%c Alien has ${alien.length} ship(s) remaining.`, 'font-size: 16px;color: fuchsia');
-                    // counterattack
-                    Alien.counterAttack(alien[0], human);
-                } else {
-                    // all alien ship destroyed
-                    console.log(`%c All alien ships were destroyed!`, 'font-size: 16px; color: orange;');
-                    console.log(`%c YOU WON!`, 'font-size: 50px; color: green;');
-                }
-            }
-        } else {
-            // human
-            console.log(`%c Your ship have been hit!`);
-            if (human.hull <= 0) {
-                console.log('%c Game Over!', 'font-size: 50px; color: red');
-            } else {
-                console.log(`%c You have ${human.hull} hull remaining.`);
-            }
-        }
-
-    }
-
+    // human attack alien
     static attack(alien, human) {
-
-        //alert(`Click "OK" to attack alien ship #${alien[0].num}.`);
 
         console.log(`%c Attacked alien ship #${alien[0].num}!`, 'font-size: 16px; font-weight: 800');
 
@@ -69,46 +36,48 @@ class Ship {
             console.log(`%c Alien ship #${alien[0].num} have been hit! You have done ${human.firepower} damage!`, 'font-style: italic; background: azure; border: 1px solid grey;font-size: 16px;');
             alien[0].hull -= human.firepower;
 
+            // success to destroy an alien ship
             if (alien[0].hull <= 0) {
                 console.log(`%c Alien ship #${alien[0].num} was destroyed!`, 'font-size: 16px;color: blue');
-                // remove the attcked alien ship
+                // remove the destroyed alien ship from the alien ship array
                 alien.shift();
 
                 // still alien ship remains..
                 if (alien.length > 0) {
                     console.log(`%c Alien has ${alien.length} ship(s) remaining.`, 'font-size: 16px;color: fuchsia');
 
-
+                    // ask whether attack next alien ship or retreat
                     let text = `You destroyed ${TOTAL_ALIEN_SHIP - alien.length} so far. Do you want to attack next alien ship?`;
+
+                    // attack next alien ship
                     if (confirm(text) == true) {
-                        // attack next ship
                         Ship.attack(alien, human);
 
-                        // Retreat : game over
+                    // Retreat : game over
                     } else {
                         console.log('%c Retreat!', 'font-size: 30px; font-weight: 800; color: grey');
                         console.log('%c Game Over!', 'font-size: 50px; color: red');
                     }
 
-                    // // counterattack
-                    // Alien.counterAttack(alien, human);
+                // all alien ship destroyed : you won
                 } else {
-                    // all alien ship destroyed
                     console.log(`%c All alien ships were destroyed!`, 'font-size: 16px; background-color: orange;');
                     console.log(`%c YOU WON!`, 'font-size: 50px; color: green;');
                 }
             } else {
 
-                // still alien ship remains..
+                // still alien ship remains : alien will counteratack
                 if (alien.length > 0) {
                     // counterattack
                     Alien.counterAttack(alien, human);
                 }
             }
 
+        // missed alien
         } else {
             console.log(`%c You missed it!`, 'font-size: 16px;color: red');
 
+            // alien attack back
             Alien.counterAttack(alien, human);
         }
     }
@@ -118,7 +87,6 @@ class Ship {
 // Alien ship
 class Alien {
     constructor() {
-        this.human = false;
         this.num = 0;
         // hull - between 3and 6
         this.hull = Math.floor(Math.random() * 4) + 3;
@@ -128,30 +96,36 @@ class Alien {
         this.accuracy = (Math.floor(Math.random() * 3) + 6) / 10;
     }
 
+    // alien attack human
     static counterAttack(alien, human) {
         // hit!
         if (Math.random() < alien[0].accuracy) {
             human.hull -= alien[0].firepower;
-            
-            console.log(`%c They are attacking you!`, 'font-size: 16px;');
+
+            console.log(`%c They are attacking you!`, 'font-size: 16px; color: #ad00c8');
             console.log(`%c You got ${alien[0].firepower} damage! You have ${human.hull} hull now.`, 'font-style: italic; background: lightpink; border: 1px solid red;font-size: 16px;');
 
+            // human attack alien when human still alive
             if (human.hull > 0) {
                 Ship.attack(alien, human);
+            
+            // human ship destroyed : game over
             } else {
                 console.log('%c Game Over', 'font-size: 50px; color: red');
             }
+
+        // missed human
         } else {
             console.log(`%c They fail to attack you!`, 'font-size: 16px; color:green');
             Ship.attack(alien, human);
         }
-
     }
 }
 
-// Start game
+// Start game : game starts when click "Start Game" button
 document.getElementById('start').addEventListener('click', e => {
-    // generate 6 random alien ships
+
+    // generate 6 random alien ships and save to the alien_ships as array
     let alien_ships = [];
     for (let i = 0; i < TOTAL_ALIEN_SHIP; i++) {
         let alien = new Alien();
@@ -162,10 +136,9 @@ document.getElementById('start').addEventListener('click', e => {
     // init human ship
     let USS_Assembly = new Ship();
 
+    // show "start game" in console
     console.log('%c Start Game!', 'background-color:navy; color: white; font-size: 24px;')
-    // console.log(alien_ships);
-    // console.log(USS_Assembly);
 
-    // attack first
+    // human attack alien first
     Ship.attack(alien_ships, USS_Assembly);
 });

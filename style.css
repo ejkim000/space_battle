@@ -39,7 +39,7 @@ h1 {
 
 #start:active {
   background-color: #000000b6;
-  transform: translateY(5px);
+  transform: translateY(4px);
 }
 .desc {
     font-size: 1.2rem;
