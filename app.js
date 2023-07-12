@@ -44,10 +44,10 @@ class Ship {
 
                 // still alien ship remains..
                 if (alien.length > 0) {
-                    console.log(`%c Alien has ${alien.length} ship(s) remaining.`, 'font-size: 16px;color: fuchsia');
+                    console.log(`%c Alien has ${alien.length} alien ship(s) remaining.`, 'font-size: 16px;color: fuchsia');
 
                     // ask whether attack next alien ship or retreat
-                    let text = `You destroyed ${TOTAL_ALIEN_SHIP - alien.length} so far. Do you want to attack next alien ship?`;
+                    let text = `You destroyed ${TOTAL_ALIEN_SHIP - alien.length} ship(s) so far. Do you want to attack next alien ship?`;
 
                     // attack next alien ship
                     if (confirm(text) == true) {
