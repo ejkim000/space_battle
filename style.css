@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-    margin-top: 35vh;
+    margin-top: 30vh;
 }
 
 h1 {
@@ -19,6 +19,7 @@ h1 {
     color: white;
     letter-spacing: 0.8vw;
     text-shadow: 5px 5px 10px #000000;
+    margin: 2rem;
 }
 
 #start {
@@ -30,4 +31,8 @@ h1 {
     margin: 0 18%;
     cursor: pointer;
     box-shadow: 5px 5px 10px #000000;
+}
+.desc {
+    font-size: 1.2rem;
+    color: white;
 }
