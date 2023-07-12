@@ -117,6 +117,7 @@ class Alien {
         // missed human
         } else {
             console.log(`%c They fail to attack you!`, 'font-size: 16px; color:green');
+            // human attack back
             Ship.attack(alien, human);
         }
     }
