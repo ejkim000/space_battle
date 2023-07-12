@@ -60,7 +60,7 @@ class Ship {
 
     static attack(alien, human) {
 
-        alert(`Click "OK" to attack alien ship #${alien[0].num}.`);
+        //alert(`Click "OK" to attack alien ship #${alien[0].num}.`);
 
         console.log(`%c Attacked alien ship #${alien[0].num}!`, 'font-size: 16px; font-weight: 800');
 
