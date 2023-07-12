@@ -1,26 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@100;200;300;400;500;600;700;800&family=Bruno+Ace&family=Luckiest+Guy&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 * {
     box-sizing: border-box;
-    font-family: 'Luckiest Guy', cursive;
+    font-family: 'Black Ops One', cursive;
     text-align: center;
+}
+
+body {
+    background: url(./images/space.jpg) no-repeat;
+    background-size: 100vw 100vh, cover;
+}
+
+.container {
+    margin-top: 35vh;
 }
 
 h1 {
     font-size: 5rem;
-    -webkit-text-fill-color: navy;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: yellowgreen;
+    color: white;
     letter-spacing: 0.8vw;
-
+    text-shadow: 5px 5px 10px #000000;
 }
+
 #start {
-    font-family: 'Albert Sans', sans-serif;
     font-size: 2rem;
-    color: navy;
-    background-color: yellowgreen;
+    color: white;
+    background-color: #00010680;
     border-radius: 15px;
     padding: 1rem;
     margin: 0 18%;
     cursor: pointer;
+    box-shadow: 5px 5px 10px #000000;
 }
