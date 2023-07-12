@@ -79,7 +79,7 @@ class Ship {
                     console.log(`%c Alien has ${alien.length} ship(s) remaining.`, 'font-size: 16px;color: fuchsia');
 
 
-                    let text = `Attack next alien ship?`;
+                    let text = `You destroyed ${TOTAL_ALIEN_SHIP - alien.length} so far. Do you want to attack next alien ship?`;
                     if (confirm(text) == true) {
                         // attack next ship
                         Ship.attack(alien, human);
@@ -108,7 +108,7 @@ class Ship {
 
         } else {
             console.log(`%c You missed it!`, 'font-size: 16px;color: red');
-            console.log(`%c They are attacking you!`, 'font-size: 16px;');
+
             Alien.counterAttack(alien, human);
         }
     }
@@ -132,6 +132,8 @@ class Alien {
         // hit!
         if (Math.random() < alien[0].accuracy) {
             human.hull -= alien[0].firepower;
+            
+            console.log(`%c They are attacking you!`, 'font-size: 16px;');
             console.log(`%c You got ${alien[0].firepower} damage! You have ${human.hull} hull now.`, 'font-style: italic; background: lightpink; border: 1px solid red;font-size: 16px;');
 
             if (human.hull > 0) {
